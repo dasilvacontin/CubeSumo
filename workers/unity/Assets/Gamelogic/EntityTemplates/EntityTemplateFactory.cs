@@ -28,14 +28,15 @@ namespace Assets.Gamelogic.EntityTemplates
 
         public static Entity CreatePlayerTemplate(string clientId)
         {
-            var playerTemplate = EntityBuilder.Begin()
-                .AddPositionComponent(Improbable.Coordinates.ZERO.ToUnityVector(), CommonRequirementSets.PhysicsOnly)
-                .AddMetadataComponent(entityType: SimulationSettings.PlayerPrefabName)
-                .SetPersistence(false)
-                .SetReadAcl(CommonRequirementSets.PhysicsOrVisual)
-                .AddComponent(new Rotation.Data(Quaternion.identity.ToNativeQuaternion()), CommonRequirementSets.PhysicsOnly)
-                .AddComponent(new ClientAuthorityCheck.Data(), CommonRequirementSets.SpecificClientOnly(clientId))
-                .AddComponent(new ClientConnection.Data(SimulationSettings.TotalHeartbeatsBeforeTimeout), CommonRequirementSets.PhysicsOnly)
+			var playerTemplate = EntityBuilder.Begin ()
+                .AddPositionComponent (Improbable.Coordinates.ZERO.ToUnityVector (), CommonRequirementSets.PhysicsOnly)
+                .AddMetadataComponent (entityType: SimulationSettings.PlayerPrefabName)
+                .SetPersistence (false)
+                .SetReadAcl (CommonRequirementSets.PhysicsOrVisual)
+                .AddComponent (new Rotation.Data (Quaternion.identity.ToNativeQuaternion ()), CommonRequirementSets.PhysicsOnly)
+                .AddComponent (new ClientAuthorityCheck.Data (), CommonRequirementSets.SpecificClientOnly (clientId))
+                .AddComponent (new ClientConnection.Data (SimulationSettings.TotalHeartbeatsBeforeTimeout), CommonRequirementSets.PhysicsOnly)
+				.AddComponent (new PlayerInput.Data (), CommonRequirementSets.SpecificClientOnly (clientId))
                 .Build();
 
             return playerTemplate;

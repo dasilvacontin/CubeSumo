@@ -1,0 +1,17 @@
+package improbable.player;
+
+type Direction {
+    float x = 1;
+    float y = 2;
+}
+
+type StartCharging {}
+type ReleaseCharge {
+    Direction direction = 1;
+}
+
+component PlayerInput {
+  id = 1004;
+  event StartCharging start_charging;
+  event ReleaseCharge release_charge;
+}
